@@ -1,0 +1,10 @@
+Nome: Java Avancado.
+Palestrante: Leandro Faria.
+Tema: Topicos de multithreading.
+Local: Sala Multiuso CIC.
+Duracao: 1:30h.
+Nome: HTML e CSS.
+Palestrante: Caio Oliveira.
+Tema: Conceitos e aplicacoes.
+Local: Anfiteatro 4.
+Duracao: 1:00h.

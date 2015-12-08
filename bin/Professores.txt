@@ -1,0 +1,4 @@
+Nome: Leandro Faria.
+Disponibilidade: Ter, 10/11/2015, 10:00-12:00; Qua, 18/11/2015, 8:00-9:30; Seg, 00/12/2015, 08:00-18:00.
+Nome: Caio Oliveira.
+Disponibilidade: Dom, 12:00-14:00; Seg, 16/11/2015, 7:00-9:30; Seg, 00/12/2015, 14:00-16:30; Ter, 00/12/2015, 08:00-18:00.
