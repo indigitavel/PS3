@@ -9,80 +9,135 @@
  */
 package psproject2;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class DisponibilityTest {
-    
-    public DisponibilityTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-    
-    /**
-     * Adiciona e executa os testes da classe Disponibility.
-     * @author Lisa
-     */     
-    Disponibility instance = new Disponibility(); 
-    @Test
-    public void addTests() {
-        System.out.println("Teste: Disponibility");
-        testPopulateData();
-        testGetStartTime();
-        testMatch();
-    }
-    /**
-     * Testa o método que preenche os dados referentes à disponilidade.
-     * String info: A string que contém toda e qualquer informação a respeito desta disponibilidade.
-     */   
-    public void testPopulateData() {
-        System.out.println("- populateData");
-        String info = "Ter, 10/11/2015, 10:00-12:00";
-        instance.populateData(info);
-    }
 
-    /**
-     * Testa o horário de início da disponibilidade.
-     * expResult: Inteiro representando em minutos o horário de início da disponibilidade.
-     */
-    public void testGetStartTime() {
-        System.out.println("- getStartTime");
-        int expResult = 600;
-        int result = instance.getStartTime();
-        assertEquals(expResult, result);
-    }
+	private static final int TEN_AM_IN_MINUTES = 600;
 
-    /**
-     * Testa o método match que verifica se a disponibilidade desejada bate com a disponibilidade existente.
-     */
-    public void testMatch() {
-        System.out.println("- match");
-        int year = 2015;
-        int month = 10; /* O mês da classe Calendário começa em zero */
-        int day = 10;
-        int dayOfWeek = 3;
-        int howLong = 120;
-        boolean expResult = true;
-        boolean result = instance.match(year, month, day, dayOfWeek, howLong);
-        assertEquals(expResult, result);
-    }
+	Disponibility disponibility = new Disponibility();
+
+	Calendar currentDate = new GregorianCalendar();
+
+	/**
+	 * Testa o método que preenche os dados referentes à disponilidade. String
+	 * info: A string que contém toda e qualquer informação a respeito desta
+	 * disponibilidade.
+	 */
+	@Test
+	public void populateCompleteDate() {
+		try {
+			String info = "Ter, 10/11/2015, 10:00-12:00";
+			disponibility.populateData(info);
+		} catch (Throwable e) {
+			fail("Should not throw an exception on valid input.");
+		}
+	}
+
+	@Test
+	public void populateWithWeekDayAndTime() {
+		try {
+			String info = "Dom, 12:00-14:00";
+			disponibility.populateData(info);
+		} catch (Throwable e) {
+			fail("Should not throw an exception on valid input.");
+		}
+	}
+
+	/**
+	 * Testa o horário de início da disponibilidade. expResult: Inteiro
+	 * representando em minutos o horário de início da disponibilidade.
+	 */
+	@Test
+	public void getStartTime() {
+		String info = "Ter, 10/11/2015, 10:00-12:00";
+		disponibility.populateData(info);
+
+		int result = disponibility.getStartTime();
+
+		assertEquals(TEN_AM_IN_MINUTES, result);
+	}
+
+	/**
+	 * Testa o método match que verifica se a disponibilidade desejada bate com
+	 * a disponibilidade existente.
+	 */
+	@Test
+	public void matchCompleteDate() {
+		String info = "Ter, 10/11/2015, 10:00-12:00";
+		disponibility.populateData(info);
+
+		int year = 2015;
+		int month = 10; // O mês da classe Calendário começa em zero
+		int day = 10;
+		int dayOfWeek = 3;
+		int howLong = 120;
+		boolean result = disponibility.match(year, month, day, dayOfWeek,
+				howLong);
+
+		assertTrue(result);
+	}
+
+	@Test
+	public void matchDateWithWeekDayAndTime() {
+		String info = "Dom, 12:00-14:00";
+		disponibility.populateData(info);
+
+		// Valores de ano, mês e dia iguais a 0 por não haver lógica de cálculo
+		// da data atual.
+		int year = 0;
+		int month = 0;
+		int day = 0;
+		int dayOfWeek = 1;
+		int howLong = 120;
+
+		boolean result = disponibility.match(year, month, day, dayOfWeek,
+				howLong);
+
+		assertTrue(result);
+	}
+	
+	@Test
+	public void matchCompleteDateWithInvalidParams() {
+		String info = "Ter, 10/11/2015, 10:00-12:00";
+		disponibility.populateData(info);
+		
+		// Valores inválidos
+		int year = 2015;
+		int month = 11;
+		int day = 8;
+		int dayOfWeek = 3;
+		int howLong = 120;
+
+		boolean result = disponibility.match(year, month, day, dayOfWeek,
+				howLong);
+
+		assertFalse(result);
+	}
+	
+	@Test
+	public void matchDateWithWeekDayAndTimeWithInvalidParams() {
+		String info = "Dom, 12:00-14:00";
+		disponibility.populateData(info);
+
+		int year = 2015;
+		int month = 11;
+		int day = 8;
+		int dayOfWeek = 3;
+		int howLong = 120;
+
+		boolean result = disponibility.match(year, month, day, dayOfWeek,
+				howLong);
+
+		assertFalse(result);
+	}
 
 }
