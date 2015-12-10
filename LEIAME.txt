@@ -1,0 +1,33 @@
+INSTRUÇÕES PARA COMPILAÇÃO E EXECUÇÃO:
+
+- Windows (todas as versões - Necessário ter JDK instalado e no PATH do sistema):
+Apenas executar o arquivo build-and-run.bat
+> build-and-run.bat
+
+- Linux (todas as versões - Necessário ter JDK instalado e no PATH do sistema):
+Apenas executar o arquivo build-and-run.sh (como root)
+$ sudo ./build-and-run.sh
+
+IMPORTANTE: Ao executar, já estará no diretório 'bin', onde também
+já se encontram os arquivos Locais.txt, Professores.txt e Palestras.txt
+necessários para a execução do programa. Portanto, ao ser questionado
+pelo caminho completo dos arquivos, basta escrever o nome dos arquivos.
+
+-------------------------------------------------------------
+
+Ambiente de Desenvolvimento:
+- Windows 10 64bit
+- NetBeans 8.0.2 IDE
+- Java JDK 8
+- JUnit 4.10
+
+Compilado e Testado em:
+- Windows 10 64bit
+- Windows 7 64bit
+- Linux Xubuntu 14.04.2 64bit
+
+-------------------------------------------------------------
+
+Desenvolvido de acordo com as especificações apresentadas em:
+
+http://aprender.ead.unb.br/pluginfile.php/130770/mod_resource/content/3/Especificacao_TP2.pdf
